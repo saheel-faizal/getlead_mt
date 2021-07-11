@@ -1,4 +1,0 @@
-#Sun Jul 11 13:27:12 IST 2021
-base.0=/home/saheel/AndroidStudioProjects/getlead_mt/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
