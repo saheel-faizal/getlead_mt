@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:getlead_mt/Model/ContactsModel.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pull_to_refresh/src/smart_refresher.dart';
@@ -121,8 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
 
             SizedBox(height: MediaQuery.of(context).size.height*0.08,),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
+            Padding(padding: const EdgeInsets.only(left: 25.0),
               child: Text("Pending Tasks",style: TextStyle(
                   fontSize: 20,
                   color: Colors.blueGrey[600]),
@@ -136,21 +136,72 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: list.length,
               itemBuilder: (context,index){
 
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                return list[index].vchrCustomerName=="No Customer Name"?Container():Padding(
+                  padding: const EdgeInsets.only(left: 25.0,right: 25,bottom: 10),
                   child: Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    elevation: 0.001,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
                     child: ListTile(
-                      leading: CircleAvatar(backgroundColor: Colors.red[100],),
-                        trailing: Text(list[index].createdDate,style: TextStyle(color: Colors.grey[700],letterSpacing: 0.5),),
-                        subtitle:Text(list[index].vchrStatus.toString(),style: TextStyle(color: Colors.red[200]),),
-                        title: Text(list[index].vchrCustomerName.toString(),style: TextStyle(letterSpacing: 0.5,
-                        color: Color(0xFF021538)))),
+                      leading:
+                      (list[index].vchrStatus=="Lost Lead")?
+                      CircleAvatar(backgroundColor: Colors.blue[200]):
+                      (list[index].vchrStatus=="New Enquiry")?
+                      CircleAvatar(backgroundColor: Colors.blue[200]):
+                      (list[index].vchrStatus=="Call Back")?
+                      CircleAvatar(backgroundColor: Colors.yellow[200]):
+                      (list[index].vchrStatus=="Interested")?
+                      CircleAvatar(backgroundColor: Colors.blue[200]):
+                      (list[index].vchrStatus=="Contacted")?
+                      CircleAvatar(backgroundColor: Colors.blue[200]):
+                      (list[index].vchrStatus=="New")?
+                      CircleAvatar(backgroundColor: Colors.yellow[200]):
+                        (list[index].vchrStatus=="Call back Later")?
+                      CircleAvatar(backgroundColor: Colors.yellow[200])
+                          :(list[index].vchrStatus=="Call Back")?
+                      CircleAvatar(backgroundColor: Colors.yellow[200])
+                          :CircleAvatar(backgroundColor: Colors.red[200]),
+                        trailing: Text(list[index].createdDate.toString(),style: TextStyle(color: Colors.grey,letterSpacing: 0.5),),
+                        // subtitle:Text(list[index].vchrStatus.toString(),style: TextStyle(color: Colors.red[200]),),
+                        subtitle:
+                        (list[index].vchrStatus=="Lost Lead")?
+                        Text(list[index].vchrStatus.toString(),
+                            style: TextStyle(color: Color(0xFF457DAA))):
+                        (list[index].vchrStatus=="New Enquiry")?
+                        Text(list[index].vchrStatus.toString(),
+                            style: TextStyle(color: Color(0xFF457DAA))):
+                        (list[index].vchrStatus=="Contacted")?
+                        Text(list[index].vchrStatus.toString(),
+                            style: TextStyle(color: Color(0xFF457DAA))):
+                        (list[index].vchrStatus=="Interested")?
+                        Text(list[index].vchrStatus.toString(),
+                            style: TextStyle(color: Color(0xFF457DAA))):
+                          (list[index].vchrStatus=="Call back Later")?
+                        Text(list[index].vchrStatus.toString(),
+                            style: TextStyle(color: Color(0xFFE0C15A))):
+                          (list[index].vchrStatus=="New")?
+                        Text(list[index].vchrStatus.toString(),
+                            style: TextStyle(color: Color(0xFFE0C15A)))
+                            :(list[index].vchrStatus=="Call Back")?
+                        Text(list[index].vchrStatus.toString(),style: TextStyle(
+                          color: Color(0xFFE0C15A),)
+                        )
+                            :Text(list[index].vchrStatus.toString(),style:TextStyle(
+                            color: Colors.red[200],)),
+                        title: Text(list[index].vchrCustomerName.toString(),style: GoogleFonts.openSans(
+
+                            color: Colors.blueGrey[600],
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w600),
+                        )
+                    ),
                   ),
                 );
               }),
+            // Color(0xFF021538)
+
           ],
         ),
       ),);
   }
 }
+
